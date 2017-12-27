@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">JsonParserProject</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_about">About</string>
+    <string name="error_connecting">Error connecting to server</string>
+    <string name="menu_cat1">cat1</string>
+    <string name="menu_cat2">cat2</string>
+    <string name="menu_cat3">cat3</string>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_connecting">Error connecting to server</string>
+    <string name="menu_cat1">cat1</string>
+    <string name="menu_cat2">cat2</string>
+    <string name="menu_cat3">cat3</string>
+</resources>
