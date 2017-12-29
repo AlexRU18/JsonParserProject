@@ -1,6 +1,5 @@
 package com.alexsprod.jsonparserproject;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -10,35 +9,21 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 import com.alexsprod.jsonparserproject.dir.CatOneFragment;
 import com.alexsprod.jsonparserproject.dir.CatThreeFragment;
 import com.alexsprod.jsonparserproject.dir.CatTwoFragment;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class MainParser extends AppCompatActivity {
+    Fragment fragment = new CatOneFragment();
+    Class fragmentClass;
     private NavigationView nviewDrawer;
     private Toolbar toolbar;
     private DrawerLayout mDrawer;
     private String TAG = MainParser.class.getSimpleName();
-
-    Fragment fragment = new CatOneFragment();
-    Class fragmentClass;
-    private ListView lv;
-    private ArrayList<HashMap<String, String>> newslist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,80 +44,6 @@ public class MainParser extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
         nviewDrawer.setCheckedItem(0);
-
-        newslist = new ArrayList<>();
-        lv = (ListView) findViewById(R.id.list_cat1);
-
-        new GetData().execute();
-    }
-
-    private class GetData extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            Toast.makeText(MainParser.this,"Json Data is downloading",Toast.LENGTH_LONG).show();
-        }
-
-        @Override
-        protected Void doInBackground(Void... arg0) {
-            HttpHandler sh = new HttpHandler();
-            // Making a request to url and getting response
-            String url = "http://legs-legs.ru/cat1json.php?json=cat1";
-            String jsonStr = sh.makeServiceCall(url);
-            newslist=new ArrayList<>();    //Arraylist initialize
-            Log.e(TAG, "Response from url: " + jsonStr);
-            if (jsonStr != null) {
-                try {
-
-                    JSONArray array = new JSONArray(jsonStr);
-                    for (int i = 0; i < array.length(); i++) {
-                        JSONObject c= null;
-                        c = array.getJSONObject(i);
-                        String id = c.getString("id");
-                        String title_cat1 = c.getString("title_cat1");
-                        String fulltext_cat1 = c.getString("fulltext_cat1");
-                        // tmp hash map for single contact
-                        HashMap<String, String> news_item = new HashMap<>();
-                        news_item.put("id", id);
-                        news_item.put("title_cat1", title_cat1);
-                        news_item.put("fulltext_cat1", fulltext_cat1);
-                        newslist.add(news_item);
-                    }
-                } catch (final JSONException e) {
-                    Log.e(TAG, "Json parsing error: " + e.getMessage());
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getApplicationContext(),
-                                    "Json parsing error: " + e.getMessage(),
-                                    Toast.LENGTH_LONG).show();
-                        }
-                    });
-
-                }
-
-            } else {
-                Log.e(TAG, "Couldn't get json from server.");
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getApplicationContext(),
-                                "Couldn't get json from server. Check LogCat for possible errors!",
-                                Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
-
-            return null;
-        }
-
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-            SimpleAdapter adapter = new SimpleAdapter(MainParser.this, newslist,
-                    R.layout.item_cat1, new String[]{ "title_cat1","fulltext_cat1"},
-                    new int[]{R.id.title_cat1, R.id.fulltext_cat1});
-            lv.setAdapter(adapter);
-        }
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
