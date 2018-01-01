@@ -12,9 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.alexsprod.jsonparserproject.dir.CatOneFragment;
-import com.alexsprod.jsonparserproject.dir.CatThreeFragment;
-import com.alexsprod.jsonparserproject.dir.CatTwoFragment;
+import com.alexsprod.jsonparserproject.fragments.CatOneFragment;
+import com.alexsprod.jsonparserproject.fragments.CatThreeFragment;
+import com.alexsprod.jsonparserproject.fragments.CatTwoFragment;
 
 
 public class MainParser extends AppCompatActivity {
@@ -43,7 +43,7 @@ public class MainParser extends AppCompatActivity {
         setupDrawerContent(nviewDrawer);
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
-        nviewDrawer.setCheckedItem(0);
+        nviewDrawer.setCheckedItem(R.id.nav_cat1);
     }
 
     private void setupDrawerContent(NavigationView navigationView) {

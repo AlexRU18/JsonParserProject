@@ -1,4 +1,4 @@
-package com.alexsprod.jsonparserproject.dir;
+package com.alexsprod.jsonparserproject.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
