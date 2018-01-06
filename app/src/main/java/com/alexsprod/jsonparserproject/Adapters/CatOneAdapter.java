@@ -1,4 +1,4 @@
-package com.alexsprod.jsonparserproject;
+package com.alexsprod.jsonparserproject.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,22 +13,22 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alexsprod.jsonparserproject.R;
 import com.alexsprod.jsonparserproject.items.Item;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 import java.util.List;
 
-import static com.alexsprod.jsonparserproject.items.JsonParser.TAG;
+import static com.alexsprod.jsonparserproject.Utils.JsonParser.TAG;
 
-public class NewsRowAdapter extends ArrayAdapter<Item> {
+public class CatOneAdapter extends ArrayAdapter<Item> {
 
     private Activity activity;
     private List<Item> items;
-    private Item objBean;
     private int row;
 
-    public NewsRowAdapter(Activity act, int resource, List<Item> arrayList) {
+    public CatOneAdapter(Activity act, int resource, List<Item> arrayList) {
         super(act, resource, arrayList);
         this.activity = act;
         this.row = resource;
@@ -52,10 +52,9 @@ public class NewsRowAdapter extends ArrayAdapter<Item> {
         if ((items == null) || ((position + 1) > items.size()))
             return view;
 
-        objBean = items.get(position);
+        Item objBean = items.get(position);
 
         holder.tvTitle = (TextView) view.findViewById(R.id.title_cat1);
-        holder.tvText = (TextView) view.findViewById(R.id.fulltext_cat1);
         holder.imgView = (ImageView) view.findViewById(R.id.img_cat1);
 
         if (holder.tvTitle != null && null != objBean.getTitle()
@@ -69,34 +68,29 @@ public class NewsRowAdapter extends ArrayAdapter<Item> {
         if (holder.imgView != null) {
             if (null != objBean.getLink()
                     && objBean.getLink().trim().length() > 0) {
-                //final ProgressBar pbar = holder.pbar;
-                Picasso.with(this.getContext())
+                Picasso.with(this.getContext().getApplicationContext())
                         .load(String.valueOf(Html.fromHtml(objBean.getLink())))
+                        .resize(250, 190)
+                        .placeholder(R.mipmap.ic_empty)
+                        .centerCrop()
                         .into(new Target() {
                             @Override
                             public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
-                               /* Save the bitmap or do something with it here */
-                                //Set it in the ImageView
                                 holder.imgView.setImageBitmap(bitmap);
-                                Log.e(TAG, "Set Downloaded Image");
                             }
 
                             @Override
                             public void onBitmapFailed(Drawable errorDrawable) {
-                                Log.e(TAG, "OnBitmapFailed");
+                                Log.e(TAG, "BitmapFailed");
                             }
 
                             @Override
                             public void onPrepareLoad(Drawable placeHolderDrawable) {
-                                Log.e(TAG, "OnPrepareLoad");
                             }
                         });
             } else {
                 holder.imgView.setImageResource(R.mipmap.ic_launcher);
-                Log.d(TAG, "Set Default Image");
             }
-        } else {
-            Log.d(TAG, "ImgView is Null");
         }
         return view;
     }

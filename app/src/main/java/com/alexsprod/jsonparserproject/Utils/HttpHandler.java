@@ -1,4 +1,4 @@
-package com.alexsprod.jsonparserproject;
+package com.alexsprod.jsonparserproject.Utils;
 
 import android.util.Log;
 
@@ -12,11 +12,9 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-
 public class HttpHandler {
 
     private static final String TAG = HttpHandler.class.getSimpleName();
-
     public HttpHandler() {
     }
 
@@ -26,7 +24,6 @@ public class HttpHandler {
             URL url = new URL(reqUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
-            // read the response
             InputStream in = new BufferedInputStream(conn.getInputStream());
             response = convertStreamToString(in);
         } catch (MalformedURLException e) {
@@ -38,13 +35,13 @@ public class HttpHandler {
         } catch (Exception e) {
             Log.e(TAG, "Exception: " + e.getMessage());
         }
+        Log.e(TAG, response);
         return response;
     }
 
     private String convertStreamToString(InputStream is) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
-
         String line;
         try {
             while ((line = reader.readLine()) != null) {
@@ -59,7 +56,7 @@ public class HttpHandler {
                 e.printStackTrace();
             }
         }
-
+        Log.e(TAG, sb.toString());
         return sb.toString();
     }
 }

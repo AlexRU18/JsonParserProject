@@ -1,4 +1,4 @@
-package com.alexsprod.jsonparserproject;
+package com.alexsprod.jsonparserproject.Utils;
 
 import android.app.Activity;
 import android.content.Context;

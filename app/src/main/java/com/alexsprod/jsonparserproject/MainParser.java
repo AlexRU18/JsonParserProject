@@ -23,7 +23,6 @@ public class MainParser extends AppCompatActivity {
     private NavigationView nviewDrawer;
     private Toolbar toolbar;
     private DrawerLayout mDrawer;
-    private String TAG = MainParser.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
