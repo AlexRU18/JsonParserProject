@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,13 +22,13 @@ import java.util.List;
 
 import static com.alexsprod.jsonparserproject.Utils.JsonParser.TAG;
 
-public class CatOneAdapter extends ArrayAdapter<Item> {
+public class CatThreeAdapter extends ArrayAdapter<Item> {
 
     private Activity activity;
     private List<Item> items;
     private int row;
 
-    public CatOneAdapter(Activity act, int resource, List<Item> arrayList) {
+    public CatThreeAdapter(Activity act, int resource, List<Item> arrayList) {
         super(act, resource, arrayList);
         this.activity = act;
         this.row = resource;
@@ -39,35 +38,34 @@ public class CatOneAdapter extends ArrayAdapter<Item> {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View view = convertView;
-        final ViewHolder holder;
-
+        final CatThreeAdapter.ViewHolder holder;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) activity
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(row, null);
 
-            holder = new ViewHolder();
+            holder = new CatThreeAdapter.ViewHolder();
             view.setTag(holder);
         } else {
-            holder = (ViewHolder) view.getTag();
+            holder = (CatThreeAdapter.ViewHolder) view.getTag();
         }
         if ((items == null) || ((position + 1) > items.size()))
             return view;
 
         Item objBean = items.get(position);
 
-        holder.tvTitle = view.findViewById(R.id.title_cat1);
-        holder.btnView = view.findViewById(R.id.btnView);
-        holder.imgView = view.findViewById(R.id.img_cat1);
+        holder.tvTitle = view.findViewById(R.id.title_cat3);
+        //holder.tvText = view.findViewById(R.id.fulltext_cat3);
+        holder.imgView = view.findViewById(R.id.img_cat3);
 
         if (holder.tvTitle != null && null != objBean.getTitle()
                 && objBean.getTitle().trim().length() > 0) {
-            holder.tvTitle.setText(Html.fromHtml(objBean.getTitle()));  //SetTitle
+            holder.tvTitle.setText(Html.fromHtml(objBean.getTitle()));
         }
-        if (holder.tvText != null && null != objBean.getText()
+        /*if (holder.tvText != null && null != objBean.getText()
                 && objBean.getText().trim().length() > 0) {
-            holder.tvText.setText(Html.fromHtml(objBean.getText()));    //SetFullText
-        }
+            holder.tvText.setText(Html.fromHtml(objBean.getText()));
+        }*/
         if (holder.imgView != null) {
             if (null != objBean.getLink()
                     && objBean.getLink().trim().length() > 0) {
@@ -79,7 +77,7 @@ public class CatOneAdapter extends ArrayAdapter<Item> {
                         .into(new Target() {
                             @Override
                             public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
-                                holder.imgView.setImageBitmap(bitmap);   //SetImage
+                                holder.imgView.setImageBitmap(bitmap);
                             }
 
                             @Override
@@ -95,19 +93,11 @@ public class CatOneAdapter extends ArrayAdapter<Item> {
                 holder.imgView.setImageResource(R.mipmap.ic_launcher);
             }
         }
-        holder.btnView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Item item = getItem(position);
-                Log.v(TAG, "############### Item is: " + item.getId());
-            }
-        });
         return view;
     }
 
     private class ViewHolder {
-        private TextView tvTitle, tvText;
+        private TextView tvTitle;
         private ImageView imgView;
-        private Button btnView;
     }
 }

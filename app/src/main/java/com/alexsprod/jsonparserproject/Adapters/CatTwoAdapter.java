@@ -54,9 +54,9 @@ public class CatTwoAdapter extends ArrayAdapter<Item> {
 
         Item objBean = items.get(position);
 
-        holder.tvTitle = (TextView) view.findViewById(R.id.title_cat2);
-        holder.tvText = (TextView) view.findViewById(R.id.fulltext_cat2);
-        holder.imgView = (ImageView) view.findViewById(R.id.img_cat2);
+        holder.tvTitle = view.findViewById(R.id.title_cat2);
+        holder.tvText = view.findViewById(R.id.fulltext_cat2);
+        holder.imgView = view.findViewById(R.id.img_cat2);
 
         if (holder.tvTitle != null && null != objBean.getTitle()
                 && objBean.getTitle().trim().length() > 0) {

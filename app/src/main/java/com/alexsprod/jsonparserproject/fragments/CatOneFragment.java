@@ -29,8 +29,7 @@ public class CatOneFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fr_cat1, container, false);
 
-        lv = (ListView) view.findViewById(R.id.list_cat1);
-        //lv.setOnItemClickListener(this);
+        lv = view.findViewById(R.id.list_cat1);
         if (Utils.isNetworkAvailable(this.getActivity())) {
             String Title = "title_cat1";
             String image = "img_cat1";

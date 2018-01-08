@@ -5,11 +5,18 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <ListView
-        android:id="@+id/list_cat3"
-        android:layout_width="0dp"
+    <GridView
+        android:id="@+id/grid_cat3"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
-    </ListView>
+        android:layout_weight="1"
+        android:columnWidth="100dp"
+        android:gravity="center"
+        android:numColumns="2"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:paddingTop="8dp"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="35dp" />
 
 </android.support.constraint.ConstraintLayout>

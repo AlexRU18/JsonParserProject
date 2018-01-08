@@ -14,12 +14,11 @@ import java.util.List;
 public class JsonParser {
 
     public static String TAG = "TAG";
-    Item objItem;
-    List<Item> listArray;
+    private List<Item> listArray;
 
     public List<Item> getData(String url, String Title, String FullText, String ImageURL) {
         try {
-            listArray = new ArrayList<Item>();
+            listArray = new ArrayList<>();
 
             HttpHandler sh = new HttpHandler();
             String jsonStr = sh.makeServiceCall(url);
@@ -28,10 +27,10 @@ public class JsonParser {
                 try {
                     JSONArray array = new JSONArray(jsonStr);
                     for (int i = 0; i < array.length(); i++) {
-                        JSONObject c = null;
+                        JSONObject c;
                         c = array.getJSONObject(i);
 
-                        objItem = new Item();
+                        Item objItem = new Item();
                         String id = c.getString("id");
                         Log.d("ID is: ", id);
                         Log.d("Title on params is: ", Title);

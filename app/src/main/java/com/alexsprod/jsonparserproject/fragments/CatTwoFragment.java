@@ -1,5 +1,6 @@
 package com.alexsprod.jsonparserproject.fragments;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,7 +29,7 @@ public class CatTwoFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fr_cat2, container, false);
 
-        lv = (ListView) view.findViewById(R.id.list_cat2);
+        lv = view.findViewById(R.id.list_cat2);
         //lv.setOnItemClickListener(this);
         if (Utils.isNetworkAvailable(this.getActivity())) {
             String Title = "title_cat2";
@@ -41,6 +42,7 @@ public class CatTwoFragment extends Fragment {
         return view;
     }
 
+    @SuppressLint("StaticFieldLeak")
     class GetData extends AsyncTask<String, Void, Void> {
 
         ProgressDialog pDialog;
