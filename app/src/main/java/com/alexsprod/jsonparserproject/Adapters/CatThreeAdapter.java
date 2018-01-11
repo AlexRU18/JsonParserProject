@@ -2,21 +2,23 @@ package com.alexsprod.jsonparserproject.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alexsprod.jsonparserproject.R;
+import com.alexsprod.jsonparserproject.fragments.ArticleFragment;
 import com.alexsprod.jsonparserproject.items.Item;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import java.util.List;
 
@@ -56,6 +58,7 @@ public class CatThreeAdapter extends ArrayAdapter<Item> {
 
         holder.tvTitle = view.findViewById(R.id.title_cat3);
         //holder.tvText = view.findViewById(R.id.fulltext_cat3);
+        holder.btnView = view.findViewById(R.id.btnViewCat3);
         holder.imgView = view.findViewById(R.id.img_cat3);
 
         if (holder.tvTitle != null && null != objBean.getTitle()
@@ -74,30 +77,46 @@ public class CatThreeAdapter extends ArrayAdapter<Item> {
                         .resize(250, 190)
                         .placeholder(R.mipmap.ic_empty)
                         .centerCrop()
-                        .into(new Target() {
-                            @Override
-                            public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
-                                holder.imgView.setImageBitmap(bitmap);
-                            }
-
-                            @Override
-                            public void onBitmapFailed(Drawable errorDrawable) {
-                                Log.e(TAG, "BitmapFailed");
-                            }
-
-                            @Override
-                            public void onPrepareLoad(Drawable placeHolderDrawable) {
-                            }
-                        });
+                        .into(holder.imgView);
             } else {
                 holder.imgView.setImageResource(R.mipmap.ic_launcher);
             }
         }
+        holder.btnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Item item = getItem(position);
+                Log.v(TAG, "############### Item is: " + item.getId());
+                Bundle bundle = new Bundle();
+                bundle.putString("ID", item.getId());
+                bundle.putString("Title", item.getTitle());
+                bundle.putString("ImgLink", item.getLink());
+                bundle.putString("Text", item.getText());
+                bundle.putString("DopText", item.getDopText());
+
+                Fragment fragment = null;
+                try {
+                    fragment = ArticleFragment.class.newInstance();
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+                if (fragment != null) {
+                    fragment.setArguments(bundle);
+                }
+                ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.flContent, fragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
         return view;
     }
 
     private class ViewHolder {
         private TextView tvTitle;
         private ImageView imgView;
+        private Button btnView;
     }
 }

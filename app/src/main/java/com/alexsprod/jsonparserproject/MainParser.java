@@ -10,9 +10,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.alexsprod.jsonparserproject.fragments.AboutFragment;
 import com.alexsprod.jsonparserproject.fragments.CatOneFragment;
 import com.alexsprod.jsonparserproject.fragments.CatThreeFragment;
 import com.alexsprod.jsonparserproject.fragments.CatTwoFragment;
@@ -21,6 +23,7 @@ import com.alexsprod.jsonparserproject.fragments.CatTwoFragment;
 public class MainParser extends AppCompatActivity {
     Fragment fragment = new CatOneFragment();
     Class fragmentClass;
+    String TAG = "Main";
     private DrawerLayout mDrawer;
 
     @Override
@@ -74,13 +77,17 @@ public class MainParser extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_about) {
-            return true;
+            try {
+                Log.d(TAG, "Selected");
+                Fragment fr = null;
+                fr = AboutFragment.class.newInstance();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.flContent, fr).commit();
+            } catch (InstantiationException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
         }
 
         return super.onOptionsItemSelected(item);

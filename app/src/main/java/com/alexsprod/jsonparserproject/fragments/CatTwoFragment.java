@@ -30,12 +30,12 @@ public class CatTwoFragment extends Fragment {
         View view = inflater.inflate(R.layout.fr_cat2, container, false);
 
         lv = view.findViewById(R.id.list_cat2);
-        //lv.setOnItemClickListener(this);
         if (Utils.isNetworkAvailable(this.getActivity())) {
             String Title = "title_cat2";
             String fullText = "fulltext_cat2";
             String image = "img_cat2";
-            new CatTwoFragment.GetData().execute(URL, Title, fullText, image);
+            String doptext = "doptext_cat2";
+            new CatTwoFragment.GetData().execute(URL, Title, fullText, image, doptext);
         } else {
             Toast.makeText(getActivity(), "No Network Connection", Toast.LENGTH_LONG).show();
         }
@@ -57,7 +57,7 @@ public class CatTwoFragment extends Fragment {
 
         @Override
         protected Void doInBackground(String... params) {
-            arrayList = new JsonParser().getData(params[0], params[1], params[2], params[3]);
+            arrayList = new JsonParser().getData(params[0], params[1], params[2], params[3], params[4]);
             return null;
         }
 

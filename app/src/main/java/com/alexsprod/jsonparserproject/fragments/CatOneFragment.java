@@ -34,7 +34,8 @@ public class CatOneFragment extends Fragment {
             String Title = "title_cat1";
             String image = "img_cat1";
             String fullText = "fulltext_cat1";
-            new GetData().execute(URL, Title, fullText, image);
+            String doptext = "doptext_cat1";
+            new GetData().execute(URL, Title, fullText, image, doptext);
         } else {
             Toast.makeText(getActivity(), "No Network Connection", Toast.LENGTH_LONG).show();
         }
@@ -56,7 +57,7 @@ public class CatOneFragment extends Fragment {
 
         @Override
         protected Void doInBackground(String... params) {
-            arrayList = new JsonParser().getData(params[0], params[1], params[2], params[3]);
+            arrayList = new JsonParser().getData(params[0], params[1], params[2], params[3], params[4]);
             return null;
         }
 

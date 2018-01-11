@@ -9,19 +9,17 @@
 
     <TextView
         android:id="@+id/title_cat1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/img_cat1"
-        android:layout_width="300dp"
-        android:layout_height="250dp"
+        android:layout_width="400dp"
+        android:layout_height="290dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -31,7 +29,7 @@
         tools:ignore="ContentDescription" />
 
     <Button
-        android:id="@+id/btnView"
+        android:id="@+id/btnViewCat1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/transparent" />

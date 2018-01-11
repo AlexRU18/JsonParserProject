@@ -9,7 +9,6 @@
         android:id="@+id/grid_cat3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:columnWidth="100dp"
         android:gravity="center"
         android:numColumns="2"
@@ -17,6 +16,6 @@
         android:paddingStart="8dp"
         android:paddingTop="8dp"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="35dp" />
+        android:verticalSpacing="10dp" />
 
 </android.support.constraint.ConstraintLayout>

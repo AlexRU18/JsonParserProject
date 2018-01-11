@@ -16,7 +16,7 @@ public class JsonParser {
     public static String TAG = "TAG";
     private List<Item> listArray;
 
-    public List<Item> getData(String url, String Title, String FullText, String ImageURL) {
+    public List<Item> getData(String url, String Title, String FullText, String ImageURL, String Doptext) {
         try {
             listArray = new ArrayList<>();
 

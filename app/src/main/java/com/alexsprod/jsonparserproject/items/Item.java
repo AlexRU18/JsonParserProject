@@ -5,6 +5,7 @@ public class Item {
     private String title;
     private String fulltext;
     private String link;
+    private String doptext;
 
     public String getId() {
         return id;
@@ -36,6 +37,14 @@ public class Item {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public String getDopText() {
+        return doptext;
+    }
+
+    public void setDopText(String doptext) {
+        this.doptext = doptext;
     }
 
 }
