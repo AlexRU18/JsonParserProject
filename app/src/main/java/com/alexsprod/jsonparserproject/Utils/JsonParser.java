@@ -13,7 +13,6 @@ import java.util.List;
 
 public class JsonParser {
 
-    public static String TAG = "TAG";
     private List<Item> listArray;
 
     public List<Item> getData(String url, String Title, String FullText, String ImageURL, String Doptext) {
@@ -22,7 +21,7 @@ public class JsonParser {
 
             HttpHandler sh = new HttpHandler();
             String jsonStr = sh.makeServiceCall(url);
-            Log.e(TAG, "Response from url: " + jsonStr);
+            String TAG = "JsonParser";
             if (url != null) {
                 try {
                     JSONArray array = new JSONArray(jsonStr);

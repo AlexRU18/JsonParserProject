@@ -3,7 +3,6 @@ package com.alexsprod.jsonparserproject.fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ public class ArticleFragment extends Fragment {
     TextView title_article;
     TextView fulltext_article;
     ImageView img_article;
-    String TAG = "ArticleFr";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,14 +33,13 @@ public class ArticleFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         savedInstanceState = getArguments();
         if (savedInstanceState != null) {
-            String id = savedInstanceState.getString("ID");
-            Log.d(TAG, "ID is: " + id);
+            //ID
+            //String id = savedInstanceState.getString("ID");
             String title = savedInstanceState.getString("Title");
-            Log.d(TAG, "Title is: " + title);
             String text = savedInstanceState.getString("Text");
-            Log.d(TAG, "Text is: " + text);
             String imgUrl = savedInstanceState.getString("ImgLink");
-            String doptext = savedInstanceState.getString("DopText");
+            //Доп.текст
+            //String doptext = savedInstanceState.getString("DopText");
 
             title_article.setText(title);
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
@@ -50,7 +47,6 @@ public class ArticleFragment extends Fragment {
             } else {
                 fulltext_article.setText(Html.fromHtml(text));
             }
-            //fulltext_article.setText(text);
             Picasso.with(this.getContext().getApplicationContext())
                     .load(imgUrl)
                     .resize(290, 250)

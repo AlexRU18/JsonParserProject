@@ -3,10 +3,10 @@ package com.alexsprod.jsonparserproject.Adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +22,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import static com.alexsprod.jsonparserproject.Utils.JsonParser.TAG;
-
 public class CatThreeAdapter extends ArrayAdapter<Item> {
 
     private Activity activity;
@@ -37,13 +35,15 @@ public class CatThreeAdapter extends ArrayAdapter<Item> {
         this.items = arrayList;
     }
 
+    @NonNull
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
         View view = convertView;
         final CatThreeAdapter.ViewHolder holder;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) activity
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            assert inflater != null;
             view = inflater.inflate(row, null);
 
             holder = new CatThreeAdapter.ViewHolder();
@@ -86,8 +86,8 @@ public class CatThreeAdapter extends ArrayAdapter<Item> {
             @Override
             public void onClick(View view) {
                 Item item = getItem(position);
-                Log.v(TAG, "############### Item is: " + item.getId());
                 Bundle bundle = new Bundle();
+                assert item != null;
                 bundle.putString("ID", item.getId());
                 bundle.putString("Title", item.getTitle());
                 bundle.putString("ImgLink", item.getLink());
@@ -97,9 +97,7 @@ public class CatThreeAdapter extends ArrayAdapter<Item> {
                 Fragment fragment = null;
                 try {
                     fragment = ArticleFragment.class.newInstance();
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
+                } catch (InstantiationException | IllegalAccessException e) {
                     e.printStackTrace();
                 }
                 if (fragment != null) {

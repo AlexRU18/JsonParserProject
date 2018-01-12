@@ -3,6 +3,7 @@ package com.alexsprod.jsonparserproject.Adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.Html;
@@ -34,13 +35,15 @@ public class CatTwoAdapter extends ArrayAdapter<Item> {
         this.items = arrayList;
     }
 
+    @NonNull
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
         View view = convertView;
         final CatTwoAdapter.ViewHolder holder;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) activity
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            assert inflater != null;
             view = inflater.inflate(row, null);
 
             holder = new CatTwoAdapter.ViewHolder();
@@ -112,7 +115,7 @@ public class CatTwoAdapter extends ArrayAdapter<Item> {
     }
 
     private class ViewHolder {
-        private TextView tvTitle, tvText, tvDoptext;
+        private TextView tvTitle, tvDoptext;
         private ImageView imgView;
         private Button btnView;
     }

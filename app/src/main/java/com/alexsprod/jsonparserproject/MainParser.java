@@ -10,7 +10,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -23,7 +22,6 @@ import com.alexsprod.jsonparserproject.fragments.CatTwoFragment;
 public class MainParser extends AppCompatActivity {
     Fragment fragment = new CatOneFragment();
     Class fragmentClass;
-    String TAG = "Main";
     private DrawerLayout mDrawer;
 
     @Override
@@ -45,6 +43,7 @@ public class MainParser extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
         nviewDrawer.getMenu().getItem(0).setChecked(true);
+        setTitle(nviewDrawer.getMenu().getItem(0).getTitle());
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -70,7 +69,6 @@ public class MainParser extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_parser, menu);
         return true;
     }
@@ -80,8 +78,7 @@ public class MainParser extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.action_about) {
             try {
-                Log.d(TAG, "Selected");
-                Fragment fr = null;
+                Fragment fr;
                 fr = AboutFragment.class.newInstance();
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.flContent, fr)
@@ -114,16 +111,10 @@ public class MainParser extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        // Вставить фрагмент, заменяя любой существующий
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
-
-        // Выделение существующего элемента выполнено с помощью
-        // NavigationView
         menuItem.setChecked(true);
-        // Установить заголовок для action bar'а
         setTitle(menuItem.getTitle());
-        // Закрыть navigation drawer
         mDrawer.closeDrawers();
     }
 }
