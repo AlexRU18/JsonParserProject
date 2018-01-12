@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +20,6 @@ import com.alexsprod.jsonparserproject.items.Item;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-
-import static com.alexsprod.jsonparserproject.Utils.JsonParser.TAG;
 
 public class CatTwoAdapter extends ArrayAdapter<Item> {
 
@@ -57,7 +54,6 @@ public class CatTwoAdapter extends ArrayAdapter<Item> {
         Item objBean = items.get(position);
 
         holder.tvTitle = view.findViewById(R.id.title_cat2);
-        //holder.tvText = view.findViewById(R.id.fulltext_cat2);
         holder.imgView = view.findViewById(R.id.img_cat2);
         holder.btnView = view.findViewById(R.id.btnViewCat2);
         holder.tvDoptext = view.findViewById(R.id.doptext_cat2);
@@ -66,16 +62,14 @@ public class CatTwoAdapter extends ArrayAdapter<Item> {
                 && objBean.getTitle().trim().length() > 0) {
             holder.tvTitle.setText(Html.fromHtml(objBean.getTitle()));
         }
-        /*if (holder.tvText != null && null != objBean.getText()
-                && objBean.getText().trim().length() > 0) {
-            holder.tvText.setText(Html.fromHtml(objBean.getText()));
-        }*/
         if (holder.imgView != null) {
             if (null != objBean.getLink()
                     && objBean.getLink().trim().length() > 0) {
                 Picasso.with(this.getContext().getApplicationContext())
                         .load(String.valueOf(Html.fromHtml(objBean.getLink())))
-                        .resize(250, 190)
+                        //.resize(250, 190)
+                        .resize(290, 250)
+                        .onlyScaleDown()
                         .placeholder(R.mipmap.ic_empty)
                         .centerCrop()
                         .into(holder.imgView);
@@ -91,8 +85,8 @@ public class CatTwoAdapter extends ArrayAdapter<Item> {
             @Override
             public void onClick(View view) {
                 Item item = getItem(position);
-                Log.v(TAG, "############### Item is: " + item.getId());
                 Bundle bundle = new Bundle();
+                assert item != null;
                 bundle.putString("ID", item.getId());
                 bundle.putString("Title", item.getTitle());
                 bundle.putString("ImgLink", item.getLink());

@@ -84,7 +84,9 @@ public class MainParser extends AppCompatActivity {
                 Fragment fr = null;
                 fr = AboutFragment.class.newInstance();
                 FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.flContent, fr).commit();
+                fragmentManager.beginTransaction().replace(R.id.flContent, fr)
+                        .addToBackStack(null)
+                        .commit();
             } catch (InstantiationException | IllegalAccessException e) {
                 e.printStackTrace();
             }

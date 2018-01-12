@@ -2,6 +2,7 @@ package com.alexsprod.jsonparserproject.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +45,12 @@ public class ArticleFragment extends Fragment {
             String doptext = savedInstanceState.getString("DopText");
 
             title_article.setText(title);
-            fulltext_article.setText(text);
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                fulltext_article.setText(Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY));
+            } else {
+                fulltext_article.setText(Html.fromHtml(text));
+            }
+            //fulltext_article.setText(text);
             Picasso.with(this.getContext().getApplicationContext())
                     .load(imgUrl)
                     .resize(290, 250)
